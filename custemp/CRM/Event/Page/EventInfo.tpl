@@ -26,12 +26,12 @@
 {* this template is used for displaying event information *}
 
 {if call_user_func(array('CRM_Core_Permission','check'), 'access CiviEvent')}
-<div class="crm-actions-ribbon crm-event-manage-tab-actions-ribbon pull-right">
+<div class="crm-actions-ribbon crm-event-manage-tab-actions-ribbon">
 	<ul id="actions">
 {if call_user_func(array('CRM_Core_Permission','check'), 'edit all events')}
 
 	<li><div id="crm-event-links-wrapper">
-	      <div id="crm-event-configure-link"><span title="{ts}Configure this event.{/ts}"><div class="icon icon-wrench"></div></span></div><!-- change icon class to work with Font Awesome - ic - 2013-05-04 -->
+	      <div id="crm-event-configure-link" class="btn"><span title="{ts}Configure this event.{/ts}"><div class="icon icon-wrench"></div></span></div><!-- change icon class to work with Font Awesome - ic - 2013-05-04 -->
 	      <div class="ac_results" id="crm-event-links-list" style="margin-left: -25px;">
 	      	   <div class="crm-event-links-list-inner">
 	      	   	<ul>
@@ -52,7 +52,7 @@
 
 {/if}
 <li><div id="crm-participant-wrapper">
-	      <div id="crm-participant-links"><span title="{ts}Participant listing links.{/ts}"><div class="icon icon-search"></div></div><!-- change icon class to work with Font Awesome - ic - 2013-05-04 -->
+	      <div id="crm-participant-links" class="btn"><span title="{ts}Participant listing links.{/ts}"><div class="icon icon-search"></div></div><!-- change icon class to work with Font Awesome - ic - 2013-05-04 -->
 	      <div class="ac_results" id="crm-participant-list" style="margin-left: -25px;">
 	      	   <div class="crm-participant-list-inner">
 	      	   	<ul>
@@ -107,36 +107,37 @@
 	    </div>
 	{/if}
   <div class="clear"></div>
-	<div class="crm-section event_date_time-section">
-    <div class="row"><!-- add .row wrapper and add span# classes for layout -->
-      <div class="span2"><label>{ts}When{/ts}</label></div>
-	    <div class="span10">
-            <abbr class="dtstart" title="{$event.event_start_date|crmDate}">
-            {$event.event_start_date|crmDate}</abbr>
-            {if $event.event_end_date}
-                &nbsp; {ts}through{/ts} &nbsp;
-                {* Only show end time if end date = start date *}
-                {if $event.event_end_date|date_format:"%Y%m%d" == $event.event_start_date|date_format:"%Y%m%d"}
-                    <abbr class="dtend" title="{$event.event_end_date|crmDate:0:1}">
-                    {$event.event_end_date|crmDate:0:1}
-                    </abbr>
-                {else}
-                    <abbr class="dtend" title="{$event.event_end_date|crmDate}">
-                    {$event.event_end_date|crmDate}
-                    </abbr>
-                {/if}
-            {/if}
+	<div id="event-specifics-wrapper">
+    <div class="crm-section event_date_time-section">
+      <div class="row event-info-wrapper"><!-- add .row wrapper and add span# classes for layout -->
+        <div class="span3 event-info-label"><label>{ts}When{/ts}</label></div>
+  	    <div class="span9 event-info-detail">
+              <abbr class="dtstart" title="{$event.event_start_date|crmDate}">
+              {$event.event_start_date|crmDate}</abbr>
+              {if $event.event_end_date}
+                  &nbsp; {ts}through{/ts} &nbsp;
+                  {* Only show end time if end date = start date *}
+                  {if $event.event_end_date|date_format:"%Y%m%d" == $event.event_start_date|date_format:"%Y%m%d"}
+                      <abbr class="dtend" title="{$event.event_end_date|crmDate:0:1}">
+                      {$event.event_end_date|crmDate:0:1}
+                      </abbr>
+                  {else}
+                      <abbr class="dtend" title="{$event.event_end_date|crmDate}">
+                      {$event.event_end_date|crmDate}
+                      </abbr>
+                  {/if}
+              {/if}
+          </div>
         </div>
       </div>
-	</div>
 
 	{if $isShowLocation}
 
         {if $location.address.1}
             <div class="crm-section event_address-section">
-              <div class="row"><!-- add .row wrapper and add span# classes for layout -->
-                <div class="span2"><label>{ts}Location{/ts}</label></div>
-                <div class="span10">{$location.address.1.display|nl2br}</div>
+              <div class="row event-info-wrapper"><!-- add .row wrapper and add span# classes for layout -->
+                <div class="span3 event-info-label"><label>{ts}Location{/ts}</label></div>
+                <div class="span9 event-info-detail">{$location.address.1.display|nl2br}</div>
               </div>
             </div>
         {/if}
@@ -159,9 +160,9 @@
 
 	{if $location.phone.1.phone || $location.email.1.email}
 	    <div class="crm-section event_contact-section">
-        <div class="row"><!-- add .row wrapper and add span# classes for layout -->
-          <div class="span2"><label>{ts}Contact{/ts}</label></div>
-	        <div class="span10">
+        <div class="row event-info-wrapper"><!-- add .row wrapper and add span# classes for layout -->
+          <div class="span3 event-info-label"><label>{ts}Contact{/ts}</label></div>
+	        <div class="span9 event-info-detail">
 	            {* loop on any phones and emails for this event *}
 	            {foreach from=$location.phone item=phone}
 	                {if $phone.phone}
@@ -182,9 +183,9 @@
 
 	{if $event.is_monetary eq 1 && $feeBlock.value}
 	    <div class="crm-section event_fees-section">
-  	    <div class="row"><!-- add .row wrapper and add span# classes for layout -->
-          <div class="span2"><label>{$event.fee_label}</label></div>
-	        <div class="span10">
+  	    <div class="row event-info-wrapper"><!-- add .row wrapper and add span# classes for layout -->
+          <div class="span3 event-info-label"><label>{$event.fee_label}</label></div>
+	        <div class="span9 event-info-detail">
 	            <table class="table table-bordered form-layout-compressed fee_block-table">
 	                {foreach from=$feeBlock.value name=fees item=value}
 	                    {assign var=idx value=$smarty.foreach.fees.iteration}
@@ -213,6 +214,7 @@
 
 
     {include file="CRM/Custom/Page/CustomDataView.tpl"}
+  </div>
 
 	{if $allowRegistration}
         <div class="action-link section register_link-section register_link-bottom">
