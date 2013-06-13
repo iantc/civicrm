@@ -77,7 +77,7 @@
 
 {if $form.additional_participants.html}
     <div class="crm-section additional_participants-section" id="noOfparticipants">
-        <div class="label">{$form.additional_participants.label}</div>
+        <div class="field-label">{$form.additional_participants.label}</div>
         <div class="content">
             {$form.additional_participants.html} &nbsp; ({ts}including yourself{/ts})<br />
             <span class="description">{ts}Fill in your registration information on this page. If you are registering additional people, you will be able to enter their registration information after you complete this page and click &quot;Continue&quot;.{/ts}</span>
@@ -94,13 +94,13 @@
 
     {if $form.is_pay_later}
         <div class="crm-section pay_later-section">
-	        <div class="label">&nbsp;</div>
+	        <div class="field-label">&nbsp;</div>
             <div class="content">{$form.is_pay_later.html}&nbsp;{$form.is_pay_later.label}</div>
             <div class="clear"></div>
         </div>
     {/if}
 {/if}
-
+{include file="CRM/common/hookElements.tpl"}
 {if $pcp && $is_honor_roll }
     <fieldset class="crm-group pcp-group">
         <div class="crm-section pcp-section">
@@ -109,60 +109,55 @@
                     {$form.pcp_display_in_roll.html} &nbsp;
                     {$form.pcp_display_in_roll.label}
                 </div>
-                <div class="clear"></div>
             </div>
             <div id="nameID" class="crm-section is_anonymous-section">
                 <div class="content">
                     {$form.pcp_is_anonymous.html}
                 </div>
-                <div class="clear"></div>
             </div>
             <div id="nickID" class="crm-section pcp_roll_nickname-section">
-                <div class="label">{$form.pcp_roll_nickname.label}</div>
+                <div class="field-label">{$form.pcp_roll_nickname.label}</div>
                 <div class="content">{$form.pcp_roll_nickname.html}
                 <div class="description">{ts}Enter the name you want listed with this contribution. You can use a nick name like 'The Jones Family' or 'Sarah and Sam'.{/ts}</div>
                 </div>
-                <div class="clear"></div>
             </div>
             <div id="personalNoteID" class="crm-section pcp_personal_note-section">
-                <div class="label">{$form.pcp_personal_note.label}</div>
+                <div class="field-label">{$form.pcp_personal_note.label}</div>
                 <div class="content">
                     {$form.pcp_personal_note.html}
                     <div class="description">{ts}Enter a message to accompany this contribution.{/ts}</div>
                 </div>
-                <div class="clear"></div>
             </div>
         </div>
     </fieldset>
 {/if}
 
+<div class="crm-section payment_processor-section row-fluid">
+  <div class="field-label span3">{$form.payment_processor.label}</div>
+  <div class="content span9">{$form.payment_processor.html}</div>
+</div>
+
+<div id="billing-payment-block"></div>
+{include file="CRM/common/paymentBlock.tpl"}
+
 {* User account registration option. Displays if enabled for one of the profiles on this page. *}
 {include file="CRM/common/CMSUser.tpl"}
-
 {include file="CRM/UF/Form/Block.tpl" fields=$customPre}
- <div class="crm-section payment_processor-section">
-      <div class="label">{$form.payment_processor.label}</div>
-      <div class="content">{$form.payment_processor.html}</div>
-      <div class="clear"></div>
- </div>
 
- <div id="billing-payment-block"></div>
- {include file="CRM/common/paymentBlock.tpl"}
-
- {include file="CRM/UF/Form/Block.tpl" fields=$customPost}
+{include file="CRM/UF/Form/Block.tpl" fields=$customPost}
 
 {if $isCaptcha}
-    {include file='CRM/common/ReCAPTCHA.tpl'}
+  {include file='CRM/common/ReCAPTCHA.tpl'}
 {/if}
 
 <div id="crm-submit-buttons" class="crm-submit-buttons">
-    {include file="CRM/common/formButtons.tpl" location="bottom"}
+  {include file="CRM/common/formButtons.tpl" location="bottom"}
 </div>
 
 {if $event.footer_text}
-    <div id="footer_text" class="crm-section event_footer_text-section">
-        <p>{$event.footer_text}</p>
-    </div>
+  <div id="footer_text" class="crm-section event_footer_text-section">
+    <p>{$event.footer_text}</p>
+  </div>
 {/if}
 </div>
 
