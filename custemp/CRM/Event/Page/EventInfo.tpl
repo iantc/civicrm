@@ -53,6 +53,12 @@
     <a href="{$registerURL}" title="{$registerText}" class="btn btn-info crm-register-button"><span>{$registerText}</span></a>
   </div>
 {/if}
+{if $registerClosed }
+<div class="messages status alert alert-info pull-left">
+  <div class="icon icon-info-sign"></div>
+     &nbsp;{ts}Registration is closed for this event{/ts}
+  </div>
+{/if}
 {if call_user_func(array('CRM_Core_Permission','check'), 'access CiviEvent')}
   <div class="crm-actions-ribbon crm-event-manage-tab-actions-ribbon">
   	<ul id="actions">
@@ -105,12 +111,7 @@
   </div>
 {/if}
 
-{if $registerClosed }
-<div class="messages status">
-  <div class="icon icon-info-sign"></div>
-     &nbsp;{ts}Registration is closed for this event{/ts}
-  </div>
-{/if}
+
 <div id="crm-event-info-wrapper"> <!-- insert extra wrapper for theming - ic 2013-05-04 -->
   <div class="vevent crm-block crm-event-info-form-block">
     <div id="event-specifics-wrapper">
