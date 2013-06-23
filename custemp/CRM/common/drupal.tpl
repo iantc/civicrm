@@ -32,7 +32,6 @@
 
 <div id="crm-container" lang="{$config->lcMessages|truncate:2:"":true}" xml:lang="{$config->lcMessages|truncate:2:"":true}">
 
-
 {include file="CRM/common/action.tpl"}
 {if $buildNavigation }
     {include file="CRM/common/Navigation.tpl"}
