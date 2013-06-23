@@ -28,7 +28,7 @@
 {if $session->getStatus(false)}
     {assign var="status" value=$session->getStatus(true)}
     <div class="messages status alert alert-info">
-    <i class="icon-info"></i>&nbsp;
+    <i class="icon-info-sign"></i>&nbsp;
         {if is_array($status)}
             {foreach name=statLoop item=statItem from=$status}
                 {if $smarty.foreach.statLoop.first}
