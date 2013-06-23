@@ -88,7 +88,7 @@
         <div class="event-info-label span3">
             {ts}Event Information{/ts}
         </div>
-        <div class="display-block event-info-detail span9">
+        <div class="event-info-detail span9">
             {include file="CRM/Event/Form/Registration/EventInfoBlock.tpl" context="ThankYou"}
         </div>
     </div>
